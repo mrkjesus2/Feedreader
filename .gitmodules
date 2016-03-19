@@ -1,0 +1,3 @@
+[submodule "gulp-starter"]
+	path = gulp-starter
+	url = git@github.com:mrkjesus2/gulp-starter.git
