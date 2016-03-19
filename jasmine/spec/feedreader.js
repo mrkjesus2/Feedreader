@@ -81,26 +81,39 @@ $(function() {
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          */
-         beforeEach(function(done) {
+        beforeEach(function(done) {
             loadFeed(0, function() {
-                done()
+                done();
             });
-         });
+        });
 
-         it('should have entries', function(done) {
+        it('should have entries', function(done) {
             var feedEntries = $('.entry');
-            console.log(feedEntries);
             expect(feedEntries.length).toBeGreaterThan(0);
             done()
-         });
+        });
     });
 
     /* Test suite named "New Feed Selection" */
-    describe('New Feed Selection', function() {
-        /* TODO: Write a test that ensures when a new feed is loaded
+    describe('New Feed Selection', function(done) {
+        /* Test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
          */
+        beforeEach(function(done) {
+            loadFeed(0, function() {
+                done();
+            });
+        });
 
+        it('should have a new article and header', function(done) {
+            var initArticle = $('.entry')[0].outerText;
+            var initHeader = $('.header-title')[0].innerText;
+            console.log(initHeader);
+            loadFeed(1, function() {
+                expect(initArticle).not.toBe($('.entry')[0].outerText);
+                expect(initHeader).not.toBe($('.header-title')[0].innerText);
+                done()
+            });
+        });
      });
 }());
