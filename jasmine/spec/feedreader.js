@@ -9,6 +9,8 @@
  * to ensure they don't run until the DOM is ready.
  */
 $(function() {
+    // Regex from 'http://blog.roymj.co.in/url-validation-using-regular-expression-javascript/'
+    var validURL = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i;
     /* This is our first test suite - a test suite just contains
     * a related set of tests. This suite is all about the RSS
     * feeds definitions, the allFeeds variable in our application.
@@ -27,20 +29,33 @@ $(function() {
         });
 
 
-        /* TODO: Write a test that loops through each feed
+        /* Loops through each feed
          * in the allFeeds object and ensures it has a URL defined
-         * and that the URL is not empty.
+         * and that the URL is not empty and valid according to regex.
          */
+        it('have valid URL', function() {
+            allFeeds.forEach(function(feed) {
+                expect(feed.url).not.toBe(undefined);
+                expect(feed.url.length).toBeGreaterThan(1);
+                expect(feed.url).toMatch(validURL);
+            });
+        });
 
-
-        /* TODO: Write a test that loops through each feed
+        /* Loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+         it('have a name', function() {
+            allFeeds.forEach(function(feed) {
+                expect(feed.name).not.toBe(undefined);
+                expect(feed.name.length).toBeGreaterThan(1);
+            });
+         });
     });
 
 
-    /* TODO: Write a new test suite named "The menu" */
+    /* Test suite named "The menu" */
+    describe('The Menu', function() {
 
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
@@ -53,9 +68,10 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+    });
 
-    /* TODO: Write a new test suite named "Initial Entries" */
-
+    /* Test suite named "Initial Entries" */
+    describe('Initial Entries', function() {
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
@@ -63,10 +79,14 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
 
-    /* TODO: Write a new test suite named "New Feed Selection"
+    });
 
+    /* Test suite named "New Feed Selection" */
+    describe('New Feed Selection', function() {
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+
+     });
 }());
