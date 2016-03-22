@@ -36,7 +36,7 @@ $(function() {
         it('have valid URL', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.url).not.toBe(undefined);
-                expect(feed.url.length).toBeGreaterThan(1);
+                expect(feed.url.length).toBeGreaterThan(0);
                 expect(feed.url).toMatch(validURL);
             });
         });
@@ -48,7 +48,7 @@ $(function() {
         it('have a name', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).not.toBe(undefined);
-                expect(feed.name.length).toBeGreaterThan(1);
+                expect(feed.name.length).toBeGreaterThan(0);
             });
         });
     });
@@ -82,15 +82,12 @@ $(function() {
          * a single .entry element within the .feed container.
          */
         beforeEach(function(done) {
-            loadFeed(0, function() {
-                done();
-            });
+            loadFeed(0, done);
         });
 
-        it('have entries', function(done) {
+        it('have entries', function() {
             var feedEntries = $('.entry');
             expect(feedEntries.length).toBeGreaterThan(0);
-            done()
         });
 
 
@@ -104,7 +101,7 @@ $(function() {
         var newFeed = {
             name: 'A test Blog',
             url: 'http://this.doesntexist.com'
-        }
+        };
 
         xit('should have a new feed', function() {
             var curLength = allFeeds.length;
@@ -119,9 +116,7 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          */
         beforeEach(function(done) {
-            loadFeed(0, function() {
-                done();
-            });
+            loadFeed(0, done);
         });
 
         it('should have a new article and header', function(done) {
@@ -131,7 +126,7 @@ $(function() {
             loadFeed(1, function() {
                 expect(initArticle).not.toBe($('.entry')[0].outerText);
                 expect(initHeader).not.toBe($('.header-title')[0].innerText);
-                done()
+                done();
             });
         });
      });
