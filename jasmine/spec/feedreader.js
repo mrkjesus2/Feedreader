@@ -45,12 +45,12 @@ $(function() {
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-         it('have a name', function() {
+        it('have a name', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).not.toBe(undefined);
                 expect(feed.name.length).toBeGreaterThan(1);
             });
-         });
+        });
     });
 
 
@@ -87,10 +87,29 @@ $(function() {
             });
         });
 
-        it('should have entries', function(done) {
+        it('have entries', function(done) {
             var feedEntries = $('.entry');
             expect(feedEntries.length).toBeGreaterThan(0);
             done()
+        });
+
+
+        xit('have a content snippet', function() {
+            var snippet = $('.entry p')[0];
+            expect(snippet.innerText.length).toBeGreaterThan(0);
+        });
+    });
+
+    describe('Add Feed', function(done) {
+        var newFeed = {
+            name: 'A test Blog',
+            url: 'http://this.doesntexist.com'
+        }
+
+        xit('should have a new feed', function() {
+            var curLength = allFeeds.length;
+            addFeed(newFeed);
+            expect(allFeeds.length).toBe(curLength + 1);
         });
     });
 
@@ -108,7 +127,7 @@ $(function() {
         it('should have a new article and header', function(done) {
             var initArticle = $('.entry')[0].outerText;
             var initHeader = $('.header-title')[0].innerText;
-            console.log(initHeader);
+
             loadFeed(1, function() {
                 expect(initArticle).not.toBe($('.entry')[0].outerText);
                 expect(initHeader).not.toBe($('.header-title')[0].innerText);

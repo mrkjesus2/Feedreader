@@ -57,6 +57,7 @@ function init() {
                      entriesLen = entries.length,
                      entryTemplate = Handlebars.compile($('.tpl-entry').html());
 
+                console.log(entries);
                  title.html(feedName);   // Set the header text
                  container.empty();      // Empty out all previous entries
 
@@ -81,6 +82,11 @@ function init() {
                },
        dataType: "json"
      });
+ }
+
+
+ function addFeed(feed) {
+    // Would need to be written
  }
 
 /* Google API: Loads the Feed Reader API and defines what function
